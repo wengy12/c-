@@ -26,6 +26,9 @@ public:
             }
         }
     }
+    long_int(vector <int> x){
+        n = x;
+    }
     string get() const{
         string output;
         stringstream ss;
@@ -50,12 +53,23 @@ public:
     int size_9(){
         return n.size();
     }
-    long_int operator + (long_int b){
-        long_int c;
+    void operator += (long_int b){
         int buff = 0;
         for (int i = 0; i < max(size_9(), b.size_9()) || buff; i++){
-            if ()
+            if (i == size_9()){
+                n.push_back(0);
+            }
+            n[i] += buff + (i < b.size_9() ? b[i] : 0);
+            buff = (n[i] >= base);
+            if (buff){
+                n[i] -= base;
+            }
         }
+    }
+    long_int operator + (long_int b){
+        long_int c(n);
+        c += b;
+        return c;
     }
 };
 
@@ -73,8 +87,9 @@ ostream& operator << (ostream& os, const long_int& x){
 
 int main () {
     long_int a, b;
-    cin >> a;
-    b = a;
-    cout << b;
+    cin >> a >> b;
+    long_int c;
+    c = a + b;
+    cout << c;
     return 0;
 }
